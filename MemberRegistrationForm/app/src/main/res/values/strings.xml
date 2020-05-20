@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Member Registration Form</string>
+    <string-array name="job_list">
+        <item>Programmer</item>
+        <item>Student</item>
+        <item >Teacher</item>
+        <item>Engineer</item>
+    </string-array>
+</resources>

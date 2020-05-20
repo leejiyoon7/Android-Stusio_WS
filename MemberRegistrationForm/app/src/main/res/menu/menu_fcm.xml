@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/ctx_photo"
+        android:title="Photo" />
+    <item
+        android:id="@+id/ctx_avatar"
+        android:title="Avatar" />
+    <item
+        android:id="@+id/ctx_reset"
+        android:title="Reset" />
+
+</menu>
