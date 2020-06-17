@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.ActionMode;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     Spinner spinner;
     ImageButton photo;
 
+    private ActionMode mActionMode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +35,49 @@ public class MainActivity extends AppCompatActivity {
         age = findViewById(R.id.Age_seekBar);
         ageTxt = findViewById(R.id.ageChange);
 
-        registerForContextMenu(photo);
+        //registerForContextMenu(photo);
+
+        photo.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                 if(mActionMode != null) return false;
+                 mActionMode = MainActivity.this.startActionMode(mActionModeCallback);
+                 v.setSelected(true);
+
+                return true;
+            }
+        });
+
+        ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                MenuInflater inflater = mode.getMenuInflater();
+                inflater.inflate(R.menu.menu_cab, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                switch(item.getItemId()) {
+                    case R.id.cab_photo: toastMsg("Add Photo");break;
+                    case R.id.cab_avatar: toastMsg("Add Avatar");break;
+                    case R.id.cab_reset: toastMsg("Reset to default");break;
+                    default:return false;
+                }
+                return true;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+                mActionMode = null;
+            }
+        };
+
 
         age.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
