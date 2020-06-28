@@ -1,0 +1,8 @@
+<resources>
+    <string-array name="makerlist">
+        <item>Apple</item>
+        <item>Samsung</item>
+        <item>LG</item>
+        <item>Sony</item>
+    </string-array>
+</resources>

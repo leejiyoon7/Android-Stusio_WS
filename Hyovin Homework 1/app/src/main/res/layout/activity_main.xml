@@ -1,16 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<EditText
+    android:id="@+id/add_title"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="16dp"
+    android:ems="10"
+    android:hint="제목을 입력하세요."
+    android:inputType="textPersonName"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<TextView
+    android:id="@+id/textView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:text="날짜:"
+    android:textSize="18sp"
+    app:layout_constraintBaseline_toBaselineOf="@+id/add_date"
+    app:layout_constraintStart_toStartOf="parent" />
+
+<TextView
+    android:id="@+id/add_date"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="16dp"
+    android:hint="날짜를 선택해주세요."
+    android:textSize="18sp"
+    app:layout_constraintEnd_toStartOf="@+id/weather_btn"
+    app:layout_constraintStart_toEndOf="@+id/textView"
+    app:layout_constraintTop_toBottomOf="@+id/add_title" />
+
+<Button
+    android:id="@+id/weather_btn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="16dp"
+    android:text="날짜 선택"
+    app:layout_constraintBaseline_toBaselineOf="@+id/add_date"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+<TextView
+    android:id="@+id/textView3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="40dp"
+    android:layout_marginEnd="16dp"
+    android:text="날씨:"
+    android:textSize="18sp"
+    app:layout_constraintEnd_toStartOf="@+id/add_weather"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+<Spinner
+    android:id="@+id/add_weather"
+    android:layout_width="320dp"
+    android:layout_height="45dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="16dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/weather_btn" />
+
+<ImageButton
+    android:id="@+id/imageButton"
+    android:layout_width="230dp"
+    android:layout_height="230dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="16dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/add_weather"
+    app:srcCompat="@android:drawable/ic_input_add" />
+
+<TextView
+    android:id="@+id/textView4"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="130dp"
+    android:layout_marginEnd="16dp"
+    android:text="오늘의 사진:"
+    android:textSize="18sp"
+    app:layout_constraintEnd_toStartOf="@+id/imageButton"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+<EditText
+    android:id="@+id/editText"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="150dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="16dp"
+    android:background="#ECF6F6"
+    android:hint="오늘의 일을 입력해주세요."
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitCenter"
-        android:layout_gravity="center_vertical|center_horizontal"
-        app:srcCompat="@drawable/ic_image" />
+<Button
+    android:id="@+id/save_btn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="16dp"
+    android:text="저장하기"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/editText" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
