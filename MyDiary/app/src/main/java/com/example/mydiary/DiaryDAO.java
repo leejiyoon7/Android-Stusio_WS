@@ -66,4 +66,22 @@ public class DiaryDAO {
         db = dbHelper.getWritableDatabase();
         db.execSQL("DELETE FROM diarydb WHERE title = '"+ a +"' AND date = '"+ b + "';");
     }
+
+    public void search(String a, String b) {
+        db = dbHelper.getReadableDatabase();
+        db.rawQuery("SELECT picturelink, content FROM diarydb WHERE title = '"+ a +"' AND date = '"+ b + "';",null);
+    }
+
+    public String emotionLast (){
+        String result = "";
+        db = dbHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM diarydb ORDER BY _id DESC LIMIT 1",null);
+
+        while (cursor.moveToNext()) {
+            result = cursor.getString(3);
+        }
+        return result;
+    }
+
 }

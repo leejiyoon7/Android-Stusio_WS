@@ -3,20 +3,28 @@ package com.example.mydiary;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -60,8 +68,41 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                View diaryview= (View) View.inflate(MainActivity.this,R.layout.watch_diary, null);
+
+                AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
+                TextView text = (TextView) diaryview.findViewById(R.id.textView2);
+                ImageView picOFDay = diaryview.findViewById(R.id.imageView);
+                String content = diarys.get(position).getContent();
+                Uri link = Uri.parse(diarys.get(position).getPicturelink());
+
+                text.setText(content);
+                picOFDay.setImageURI(link);
+
+                dlg.setView(diaryview);
+                dlg.setPositiveButton("확인",null);
+                dlg.show();
             }
         });
+
+        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+            startLoginActivity();
+        }
+    }
+
+    private void startLoginActivity() {
+        Intent intent = new Intent(this, LoginGoogle.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private Toast toast;
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        toast = Toast.makeText(this,"이용해 주셔서 감사합니다.", Toast.LENGTH_LONG);
+        toast.show();
+        finish();
     }
 
     @Override
@@ -87,8 +128,20 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         DiaryAdapter adapter = (DiaryAdapter) dlistview.getAdapter();
         adapter.diarys = dao.getAll();
+        this.diarys = adapter.diarys;
         adapter.notifyDataSetChanged();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        if(dao.emotionLast().equals("매우기쁨")){
+            toolbar.setBackgroundColor(Color.parseColor("#afe3ff"));
+        }else if(dao.emotionLast().equals("기쁨")){
+            toolbar.setBackgroundColor(Color.parseColor("#1612e6"));
+        }else if(dao.emotionLast().equals("우울")){
+            toolbar.setBackgroundColor(Color.parseColor("#f5d20a"));
+        }else if(dao.emotionLast().equals("매우우울")){
+            toolbar.setBackgroundColor(Color.parseColor("#0af51e"));
+        }else{
+            toolbar.setBackgroundColor(Color.parseColor("#EFAAAA"));
+        }
     }
-
-
 }

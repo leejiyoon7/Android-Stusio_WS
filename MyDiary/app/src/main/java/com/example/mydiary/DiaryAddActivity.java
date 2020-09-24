@@ -45,7 +45,7 @@ public class DiaryAddActivity extends AppCompatActivity {
         ab.setTitle("Add New Diary");
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.weatherlist, android.R.layout.simple_spinner_item);
+                R.array.emotionlist, android.R.layout.simple_spinner_item);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dweather.setAdapter(adapter);

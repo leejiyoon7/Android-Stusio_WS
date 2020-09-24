@@ -82,7 +82,9 @@ public class DiaryAdapter extends ArrayAdapter {
                                 //이름과 날짜를 받아와서 db 삭제
                                 case R.id.delete:
                                     Toast.makeText(context.getApplicationContext(), " Delete Clicked at position " + " : " + pos, Toast.LENGTH_LONG).show();
-                                    dao.delete(diary.getTitle(),diary.getDate());
+                                    dao.delete(diary.getTitle(), diary.getDate());
+                                    diarys.remove(diary);
+                                    notifyDataSetChanged();
                                     break;
 
                                     default:
